@@ -22,13 +22,14 @@ class User {
 	  CONSTRUCTOR                   
 	 *************************************************************************/
 	public function initialize( ) {
-		if ( isset( $_GET[ 'user' ] ) ) {
+		if ( ! isset( $_SESSION[ 'user' ] ) && isset( $_POST[ 'user' ] ) ) {
 			$users = parse_ini_file( SETTING_PATH . '/users.ini' );
 			if ( 
-				isset( $users[ $_GET[ 'user' ] ] ) && 
-				$users[ $_GET[ 'user' ] ] == $_GET[ 'password' ]
+				isset( $users[ $_POST[ 'user' ] ] ) && 
+				$users[ $_POST[ 'user' ] ] == sha1( $_POST[ 'password' ] )
 			) {
-				$_SESSION[ 'user' ] = $_GET[ 'user' ];
+				$_SESSION[ 'user' ] = $_POST[ 'user' ];
+				Notification::push( 'Connexion' );
 			} else {
 				Notification::push( 'Mauvais identifiants', Notification::ERROR );
 			}

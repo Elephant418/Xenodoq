@@ -8,8 +8,7 @@ $title = 'Connectez-vous';
 <?php
 	}
 ?>
-<form method="get" class="form-horizontal">
-	<legend>Connectez-vous</legend>
+<form method="post" class="form-horizontal">
 	<div class="control-group">
 		<label class="control-label" for="user">Identifiant</label>
 		<div class="controls">
