@@ -19,12 +19,16 @@ require( $root_path . '/utils/File.php' );
 
 
 // INITIALIZATION
-define( 'HTML_EOL'   , '<br>' . PHP_EOL ) ;
-define( 'URI'        , rawurldecode( \UString\substr_before( $_SERVER[ 'REQUEST_URI' ], '?' ) ) );
-define( 'ROOT_PATH'  , '..' );
-define( 'DATA_PATH'  , ROOT_PATH . '/data' );
-define( 'KERNEL_PATH', ROOT_PATH . '/kernel' );
-define( 'PAGES_PATH' , KERNEL_PATH . '/pages' );
+define( 'HTML_EOL'     , '<br>' . PHP_EOL ) ;
+define( 'URI'          , rawurldecode( \UString\substr_before( $_SERVER[ 'REQUEST_URI' ], '?' ) ) );
+define( 'ROOT_PATH'    , '..' );
+define( 'DATA_PATH'    , ROOT_PATH . '/data' );
+define( 'KERNEL_PATH'  , ROOT_PATH . '/kernel' );
+define( 'PAGES_PATH'   , KERNEL_PATH . '/pages' );
+define( 'SETTING_PATH' , ROOT_PATH . '/setting' );
+$setting = parse_ini_file( SETTING_PATH . '/application.ini' );
+define( 'APP_NAME'     , $setting[ 'name' ] );
+define( 'APP_LOGO_PATH', $setting[ 'logo_path' ] );
 
 
 // LOGIC :)

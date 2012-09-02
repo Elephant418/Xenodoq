@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title><?= $title ?></title>
+	<title><?= APP_NAME . ' - ' . $title ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="stylesheet" href="/twbootstrap/bootstrap.css">
@@ -13,20 +13,14 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="/">Share</a>
+				<a class="brand" href="/"><?= APP_NAME ?></a>
 				<div class="nav-collapse">
-					<ul class="nav">
-						<li><a href="/" title="home">Accueil</a></li>
-					</ul>
 				<?php
 				if ( User::is_logged( ) ) {
 				?>
 					<ul class="nav pull-right">
 						<li class="dropdown">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;"><?= User::$name ?> <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="/?logout">Se déconnecter</a></li>
-							</ul>
+							<li><a href="/?logout">Se déconnecter</a></li>
 						</li>
 					</ul>
 				<?php

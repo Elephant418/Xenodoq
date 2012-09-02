@@ -31,13 +31,20 @@ class Page {
 	public function render( ) {
 		$title = 'Title';
 		ob_start();		
-		require( PAGES_PATH . '/' . $this->page_name . '.php' );
+		require( $this->find_file( $this->page_name ) );
 		$content = ob_get_contents();
 		ob_end_clean();
 		ob_start();		
-		require( KERNEL_PATH . '/layout.php' );
+		require( $this->find_file( 'layout' ) );
 		$html = ob_get_contents();
 		ob_end_clean();
 		return $html;
+	}
+	public function find_file( $page_name ) {
+		$custom_file = CUSTOM_PAGES_PATH . '/' . $page_name . '.php';
+		if ( is_file( $custom_file ) ) {
+			return $custom_file;
+		}
+		return PAGES_PATH . '/' . $page_name . '.php';
 	}
 }

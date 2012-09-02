@@ -23,7 +23,7 @@ class User {
 	 *************************************************************************/
 	public function initialize( ) {
 		if ( isset( $_GET[ 'user' ] ) ) {
-			$users = parse_ini_file( DATA_PATH . '/users.ini' );
+			$users = parse_ini_file( SETTING_PATH . '/users.ini' );
 			if ( 
 				isset( $users[ $_GET[ 'user' ] ] ) && 
 				$users[ $_GET[ 'user' ] ] == $_GET[ 'password' ]
