@@ -37,8 +37,6 @@ $user->initialize( );
 if ( ! $user->is_logged( ) ) {
 	if ( URI != '/' ) {
 		Notification::push( 'Vous devez vous connecter pour voir cette page', Notification::ERROR );
-		header( 'Location: /' );
-		exit( );
 	}
 	$page = new Page( 'login' );
 } else {
