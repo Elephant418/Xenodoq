@@ -1,3 +1,25 @@
+<ul class="breadcrumb">
+<?php 
+	$uri = URI;
+	\UString\must_not_ends_with( $uri, '/' );
+	$parts = explode( '/', $uri );
+	foreach ( $parts as $key => $part ) {
+		$name = $part ? $part : 'Racine';
+		if ( $key == count( $parts ) - 1 ) {
+?>
+	<li class="active"><?= $name ?></li>
+<?php
+		} else {
+?>
+	<li>
+		<a href="/<?= implode( '/', array_slice( $parts, 1, $key ) ) ?>"><?= $name ?></a>
+		<span class="divider">/</span>
+	</li>
+<?php
+		}
+	}
+?>
+</ul>
 <table class="table">
 	<thead>
 		<tr>
@@ -10,16 +32,6 @@
 	<tbody>
 <?php
 $title = 'Liste des fichiers';
-if ( URI != '/' ) {
-?>
-	<tr>
-		<td><img src="/icon/folder.png" alt="folder icon" /></td>
-		<td><a href="<?= dirname( URI ) ?>"><i>Dossier parent</i></a></td>
-		<td></td>
-		<td></td>
-	</tr>
-<?php
-}
 $files = \UFile\list_folder( User::$data_path );
 $today = gmdate( 'd M Y', time( ) );
 foreach ( $files as $file ) {
