@@ -32,11 +32,14 @@ class User {
 			} else {
 				Notification::push( 'Mauvais identifiants', Notification::ERROR );
 			}
-		} else if ( isset( $_GET[ 'logout' ] ) ) {
-			Notification::push( 'Déconnexion' );
-			unset( $_SESSION[ 'user' ] );
 		}
 		if ( isset( $_SESSION[ 'user' ] ) ) {
+			if ( isset( $_GET[ 'logout' ] ) ) {
+				Notification::push( 'Déconnexion' );
+				unset( $_SESSION[ 'user' ] );
+				header( 'Location: /' );
+				exit( );
+			}
 			self::$name = $_SESSION[ 'user' ];
 			self::$root_path = DATA_PATH . '/' . self::$name;
 			if ( ! is_dir( self::$root_path ) ) {
