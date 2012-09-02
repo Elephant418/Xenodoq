@@ -23,7 +23,7 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th></th>
+			<th width="20"></th>
 			<th>Nom du fichier</th>
 			<th>Taille</th>
 			<th>Date</th>
@@ -31,6 +31,16 @@
 	</thead>
 	<tbody>
 <?php
+if ( count( $parts ) > 1 ) {
+?>
+	<tr>
+		<td><img src="/icon/folder.png" alt="folder icon" /></td>
+		<td><a href="/<?= implode( '/', array_slice( $parts, 1, count( $parts ) - 2 ) ) ?>">..</a></td>
+		<td></td>
+		<td></td>
+	</tr>
+<?php
+}
 $title = 'Liste des fichiers';
 $files = \UFile\list_folder( User::$data_path );
 $today = gmdate( 'd M Y', time( ) );
