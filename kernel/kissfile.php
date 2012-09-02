@@ -35,6 +35,11 @@ define( 'APP_LOGO_PATH', $setting[ 'logo_path' ] );
 $user = new User;
 $user->initialize( );
 if ( ! $user->is_logged( ) ) {
+	if ( URI != '/' ) {
+		Notification::push( 'Vous devez vous connecter pour voir cette page', Notification::ERROR );
+		header( 'Location: /' );
+		exit( );
+	}
 	$page = new Page( 'login' );
 } else {
 	if ( is_file( User::$data_path ) ) {
