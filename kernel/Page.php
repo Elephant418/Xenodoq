@@ -29,8 +29,13 @@ class Page {
 	  RENDER METHODS                   
 	 *************************************************************************/
 	public function render( ) {
+		$title = 'Title';
 		ob_start();		
 		require( PAGES_PATH . '/' . $this->page_name . '.php' );
+		$content = ob_get_contents();
+		ob_end_clean();
+		ob_start();		
+		require( KERNEL_PATH . '/layout.php' );
 		$html = ob_get_contents();
 		ob_end_clean();
 		return $html;

@@ -30,17 +30,17 @@ class User {
 			) {
 				$_SESSION[ 'user' ] = $_GET[ 'user' ];
 			} else {
-				echo 'Mauvais identifiants' . HTML_EOL;
+				Notification::push( 'Mauvais identifiants', Notification::ERROR );
 			}
 		} else if ( isset( $_GET[ 'logout' ] ) ) {
-			echo 'Déconnexion' . HTML_EOL;
+			Notification::push( 'Déconnexion' );
 			unset( $_SESSION[ 'user' ] );
 		}
 		if ( isset( $_SESSION[ 'user' ] ) ) {
-			self::$name = $_GET[ 'user' ];
+			self::$name = $_SESSION[ 'user' ];
 			self::$root_path = DATA_PATH . '/' . self::$name;
 			if ( ! is_dir( self::$root_path ) ) {
-				echo 'Erreur interne : no data' . HTML_EOL;
+				Notification::push( 'Erreur interne : no data this user', Notification::ERROR );
 				self::$name = NULL;
 			}
 			self::$data_path = self::$root_path . URI;
@@ -52,7 +52,7 @@ class User {
 	/*************************************************************************
 	  PUBLIC METHODS                   
 	 *************************************************************************/
-	public function is_logged( ) {
+	static public function is_logged( ) {
 		return ( ! is_null( self::$name ) );
 	}
 }

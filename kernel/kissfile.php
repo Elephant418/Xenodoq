@@ -12,6 +12,7 @@ session_start( );
 $root_path = dirname( __FILE__ );
 require( $root_path . '/User.php' );
 require( $root_path . '/Page.php' );
+require( $root_path . '/Notification.php' );
 require( $root_path . '/utils/String.php' );
 require( $root_path . '/utils/Array.php' );
 require( $root_path . '/utils/File.php' );
@@ -22,7 +23,8 @@ define( 'HTML_EOL'   , '<br>' . PHP_EOL ) ;
 define( 'URI'        , rawurldecode( \UString\substr_before( $_SERVER[ 'REQUEST_URI' ], '?' ) ) );
 define( 'ROOT_PATH'  , '..' );
 define( 'DATA_PATH'  , ROOT_PATH . '/data' );
-define( 'PAGES_PATH' , ROOT_PATH . '/kernel/pages' );
+define( 'KERNEL_PATH', ROOT_PATH . '/kernel' );
+define( 'PAGES_PATH' , KERNEL_PATH . '/pages' );
 
 
 // LOGIC :)
@@ -34,7 +36,7 @@ if ( ! $user->is_logged( ) ) {
 	if ( is_file( User::$data_path ) ) {
 		\UFile\force_download( User::$data_path );
 	} else if ( ! is_dir( User::$data_path ) ) {
-		$page = new Page( 'error_500' );
+		$page = new Page( 'error' );
 	} else {
 		$page = new Page( 'list' );
 	}
