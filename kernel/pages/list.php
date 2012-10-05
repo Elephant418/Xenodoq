@@ -43,7 +43,7 @@ if ( count( $parts ) > 1 ) {
 }
 $title = 'Liste des fichiers';
 $files = \UFile\list_folder( User::$data_path );
-$today = gmdate( 'd M Y', time( ) );
+$today = date( 'd M Y', time( ) );
 foreach ( $files as $file ) {
 	$type = \UFile\type( $file );
 	$href = substr( $file, strlen( User::$root_path ) );
@@ -51,9 +51,9 @@ foreach ( $files as $file ) {
 		$date = '';
 		$size = '';
 	} else {
-		$date = gmdate( 'd M Y', filemtime( $file ) );
+		$date = date( 'd M Y', filemtime( $file ) );
 		if ( $date == $today ) {
-			$date = gmdate( 'H:i:s', filemtime( $file ) );
+			$date = date( 'H:i:s', filemtime( $file ) );
 		}
 		$size = \UFile\format_size( $file );
 	}
